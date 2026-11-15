@@ -90,9 +90,9 @@ class Model:
         for distrib in self._distributori:
             prezzi = PrezzoDAO.get_prezzi(distrib.id)
             lista_prezzi_prima_settimana = []
+            count = 0
             for p in prezzi:
                 #i prezzi sono riportati nel database in ordine temporale
-                count = 0
                 if p.data.month == mese and count < 7 :
                     lista_prezzi_prima_settimana.append(p.prezzo_litro)
                     count += 1

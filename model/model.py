@@ -59,17 +59,27 @@ class Model:
 
     def __ricorsione(self, sequenza_parziale, giorno, ultimo_distributore, costo_corrente, prezzi_settimana):
         """ Implementa la ricorsione """
-        if giorno == 7 :
-            return ...
+        if giorno == 8 :
+            if self.__costo_ottimo == -1 or self.__costo_ottimo < costo_corrente:
+                self.__costo_ottimo = costo_corrente
+                self.__sequenza_ottima = sequenza_parziale.copy()
+            return
 
-        for ...:  # un loop, se necessario
-            compute_partial()
+        for distributore in self._distributori:
+            # un loop, se necessario
+            if ultimo_distributore is not None and distributore != ultimo_distributore:
+                costo_spostamento = 5
+            else:
+                costo_spostamento = 0
 
-            if filter:
-                recursion(..., level + 1)
+            costo_carburante = 100 * prezzi_settimana[distributore.id][giorno - 1]
+            nuovo_costo = costo_corrente + costo_carburante + costo_spostamento
 
-            # 🟣 D
-            back_tracking()
+            sequenza_parziale.append(distributore.id)
+
+            self.__ricorsione(sequenza_parziale, giorno + 1, distributore, nuovo_costo, prezzi_settimana)
+            # back tracking
+            sequenza_parziale.pop()
 
     def __get_prezzi_prima_settimana_mese(self, mese: int):
         """
